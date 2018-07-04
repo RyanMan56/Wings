@@ -15,9 +15,9 @@ TagManager:
   - 
   - 
   - PostProcessing
-  - 
-  - 
-  - 
+  - Player Body
+  - Floor
+  - Walls
   - 
   - 
   - 

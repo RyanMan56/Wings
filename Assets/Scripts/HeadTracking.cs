@@ -21,11 +21,9 @@ public class HeadTracking : MonoBehaviour
 
         transform.localPosition = headsetPos;
         transform.localRotation = headsetRot;
-
-        //playerCollider.transform.localPosition = transform.localPosition;
+        
         playerCollider.transform.rotation = Quaternion.identity;
-        playerCollider.height = headsetPos.y / transform.localScale.y; // Height is definitely right, center is wrong
-        // playerCollider height already adjusted for scale
+        playerCollider.height = headsetPos.y / transform.localScale.y;
         playerCollider.center = new Vector3(playerCollider.center.x, - playerCollider.height / 2f + headCollider.radius, playerCollider.center.z);
 
         //transform.parent.position = Vector3.zero;
