@@ -23,6 +23,7 @@ public class HandGrabbing : MonoBehaviour
     private Vector3 _lastFramePosition;
     private Transform _currentGrabObject;
     private bool _isGrabbing;
+    private int layerBeforeGrab;
 
     // Use this for initialization
     void Start()
@@ -72,6 +73,10 @@ public class HandGrabbing : MonoBehaviour
                         colliders[0].gameObject.AddComponent<Rigidbody>();
                     }
 
+                    // Change object's layer to "Grabbed" so it can affect other objects but not player's head / body (so the object can't push the player while being held)
+                    layerBeforeGrab = colliders[0].gameObject.layer;
+                    colliders[0].gameObject.layer = 12;
+
                     //set grab object to kinematic (disable physics)
                     colliders[0].GetComponent<Rigidbody>().isKinematic = true;
 
@@ -97,7 +102,8 @@ public class HandGrabbing : MonoBehaviour
             //if we we release grab button, release current object
             if (Input.GetAxis(InputName) < 0.01f)
             {
-
+                // Reset object's layer so player's head can affect it again
+                _currentGrabObject.gameObject.layer = layerBeforeGrab;
 
                 //set grab object to non-kinematic (enable physics)
                 Rigidbody _objectRGB = _currentGrabObject.GetComponent<Rigidbody>();
