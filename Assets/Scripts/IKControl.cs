@@ -12,7 +12,8 @@ public class IKControl : MonoBehaviour
     public bool ikActive = false;
     public Transform leftHandObj = null;
     public Transform rightHandObj = null;
-    public Transform lookObj = null;
+    public Transform head = null;
+    public Transform extra;
 
     void Start()
     {
@@ -30,11 +31,17 @@ public class IKControl : MonoBehaviour
             {
 
                 // Set the look target position, if one has been assigned
-                if (lookObj != null)
-                {
-                    animator.SetLookAtWeight(1);
-                    animator.SetLookAtPosition(lookObj.position);
-                }
+                //if (lookObj != null)
+                //{
+                //    animator.SetLookAtWeight(1);
+                //    animator.SetLookAtPosition(lookObj.position);
+                //}
+                
+                Vector3 rotAdjust = new Vector3(-head.localEulerAngles.y, head.localEulerAngles.z, -head.localEulerAngles.x);
+                Quaternion rot = Quaternion.Euler(rotAdjust);
+                animator.SetBoneLocalRotation(HumanBodyBones.Neck, rot);
+
+                //animator.Set
 
                 // Set the left hand target position and rotation, if one has been assigned
                 if (leftHandObj != null)

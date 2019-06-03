@@ -8,6 +8,7 @@ public class HeadTracking : MonoBehaviour
     private readonly XRNode nodeType = XRNode.Head;
     public CapsuleCollider playerCollider;
     private SphereCollider headCollider;
+    public GameObject avatar;
 
 	// Use this for initialization
 	void Start () {
@@ -23,7 +24,7 @@ public class HeadTracking : MonoBehaviour
         transform.localRotation = headsetRot;
         
         playerCollider.transform.rotation = Quaternion.identity;
-        playerCollider.height = headsetPos.y / transform.localScale.y;
+        playerCollider.height = headsetPos.y / transform.localScale.y + headCollider.radius;
         playerCollider.center = new Vector3(playerCollider.center.x, - playerCollider.height / 2f + headCollider.radius, playerCollider.center.z);
 
         //transform.parent.position = Vector3.zero;
